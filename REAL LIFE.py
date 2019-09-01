@@ -68,7 +68,11 @@ for index in range(0,10):
         for index, letter in enumerate(selected_word):
             if letter is input_letter:
                 hidden_word[index] = input_letter
-
+                input_word = input("Can you guess the word?(Yes/No): ")
+                if input_word == "yes":
+                    attempt = input("Type the word: ")
+                else:
+                    print()
     else:
         print("No, sorry")
         lives -= 1
