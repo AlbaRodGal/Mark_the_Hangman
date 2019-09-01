@@ -13,14 +13,14 @@ print()
 
 # Import file
 
-with open("D:\Primer_proyecto\Python\ListOfWords.txt") as f:
+with open("C:/Users/Alba/PycharmProjects/MarkTheHangman/ListOfWords.txt") as f:
     list_of_words = f.readlines()
 
 # Choose random word of list_of_words
 
 random_word = random.choice(list_of_words)
 selected_word = list(random_word.rstrip("\n"))
-# print(selected_word)
+print(selected_word)
 
 # print(selected_word)
 
@@ -62,7 +62,9 @@ for index in range(0,10):
         print()
     else:
         print("Sorry, I didn't understand that")
+
     if input_letter in selected_word:
+        print("Well Done!")
         for index, letter in enumerate(selected_word):
             if letter is input_letter:
                 hidden_word[index] = input_letter
@@ -75,6 +77,4 @@ for index in range(0,10):
             print()
             print("GAME OVER")
             break
-
-
 
