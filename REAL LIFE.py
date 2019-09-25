@@ -16,11 +16,6 @@ def generate_random_word(list_of_words):
     selected_word = list(random_word.rstrip("\n"))
     return selected_word
 
-# Import file
-
-with open("/Users/albarodriguez/Projects/Mark_the_Hangman/ListOfWords.txt") as f:
-    list_of_words = f.readlines()
-
 # Function to hide selected_word
 
 def hide_word(selected_word):
@@ -28,12 +23,15 @@ def hide_word(selected_word):
     hidden_word = ["_"] * len(selected_word)
     return hidden_word
 
+# Funtion to print an updated version hidden_word
+def print_hidden_word():
+    print(" ".join([letter for letter in hidden_word]))
+
+#################### --- LIVES --- to be reviewed --- #########################
+
 print(f"Hint: {number_of_letters} letters")
-
 lives = 5
-
 print(f"Lives: {lives}")
-
 print()
 
 # Function to look for user's input in selected word
@@ -62,9 +60,7 @@ def check_input():
         print()
         print("GAME OVER")
         break
-# Funtion to print an updated version hidden_word
-def print_hidden_word():
-    print(" ".join([letter for letter in hidden_word])) # .join converts hidden_word in string
+
 
 # Function for user to attempt to guess the word
 def input_word():
@@ -98,9 +94,12 @@ welcome = "Hello from the other side!"
 instructions = """Can you guess the word?"""
 random_word = random.choice(list_of_words)
 selected_word = list(random_word.rstrip("\n"))
+hidden_word = ["_"] * len(selected_word)
+
 
 #### Working Programme ####
 
 print_instructions(welcome,instructions)
 generate_random_word(list_of_words)
 hide_word(selected_word)
+print_hidden_word():
