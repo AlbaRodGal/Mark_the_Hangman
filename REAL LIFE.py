@@ -12,20 +12,20 @@ def print_instructions(welcome, instructions):
 # Choose random word of list_of_words
 
 def generate_random_word(list_of_words):
-    random_word = random.choice(list_of_words)
-    selected_word = list(random_word.rstrip("\n"))
-    return selected_word
+    word = random.choice(list_of_words)
+    random_word = list(word.rstrip("\n"))
+    return random_word
 
-# Function to hide selected_word
+# Function to hide random_word
 
-def hide_word(selected_word):
-    number_of_letters = len(selected_word)
-    hidden_word = ["_"] * len(selected_word)
+def hide_word(random_word):
+    hidden_word = ["_"] * len(random_word)
     return hidden_word
 
 # Funtion to print an updated version hidden_word
 def print_hidden_word():
     print(" ".join([letter for letter in hidden_word]))
+    return None
 
 #################### --- LIVES --- to be reviewed --- #########################
 
@@ -88,18 +88,11 @@ def check_user_attempt():
 with open("/Users/albarodriguez/Projects/Mark_the_Hangman/ListOfWords.txt") as f:
     list_of_words = f.readlines()
 
-#### Definition of variables ####
-
 welcome = "Hello from the other side!"
 instructions = """Can you guess the word?"""
-random_word = random.choice(list_of_words)
-selected_word = list(random_word.rstrip("\n"))
-hidden_word = ["_"] * len(selected_word)
 
+print_instructions(welcome, instructions)
+random_word = generate_random_word(list_of_words)
 
-#### Working Programme ####
-
-print_instructions(welcome,instructions)
-generate_random_word(list_of_words)
-hide_word(selected_word)
-print_hidden_word():
+hidden_word = hide_word(random_word)
+print_hidden_word(hidden_word)
