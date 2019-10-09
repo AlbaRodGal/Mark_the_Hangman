@@ -40,26 +40,13 @@ def input():
         print_hidden_word()
         input_letter = input("Please type a letter or word:  ")
 
-# Function to validate and check user's input
-def check_input():    
+# Function to check whether the input_letter is a letter
+
+def validate_input_letter(input_letter):
     if input_letter.isalpha():
-        print()
+        a = print_new_word(hidden_word)
     else:
-        print("Sorry, I didn't understand that")
-    if input_letter in selected_word:
-        print("Well Done!")
-        for index, letter in enumerate(selected_word):
-            if letter is input_letter:
-                hidden_word[index] = input_letter
-            
-    else:
-        print("No, sorry")
-        lives -= 1
-        print(f"Lives: {lives}")
-    if lives == 0:
-        print()
-        print("GAME OVER")
-        break
+        print("Sorry, that's not a letter. Please try again.")
 
 
 # Function for user to attempt to guess the word
@@ -96,3 +83,5 @@ random_word = generate_random_word(list_of_words)
 
 hidden_word = hide_word(random_word)
 print_hidden_word(hidden_word)
+validation = validate_input_letter(input_letter)
+
