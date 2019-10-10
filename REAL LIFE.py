@@ -44,9 +44,25 @@ def input():
 
 def validate_input_letter(input_letter):
     if input_letter.isalpha():
-        a = print_new_word(hidden_word)
+        a = check_answer(word, input_letter)
     else:
         print("Sorry, that's not a letter. Please try again.")
+        
+
+# Function to check whether or not input_letter in in word
+
+def check_answer(word, input_letter):
+    for index, letter in enumerate(word):
+        if letter is input_letter:
+            hidden_word[index] = input_letter
+        # else:
+        #     wrong = wrong_answer(word, input_letter) 
+
+    print_new_word(hidden_word)
+
+   # print(f'{input_letter} is right. Well done!')
+    print_new_word(hidden_word)
+    
 
 
 # Function for user to attempt to guess the word
