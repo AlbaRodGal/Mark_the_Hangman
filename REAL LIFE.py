@@ -1,88 +1,59 @@
 "Second attempt of building a word guessing game."
 
 import random
+import sys
 
 # Welcome and instructions:
 
 def print_instructions(welcome, instructions):
     print(welcome.center(150))
     print(instructions.center(150))
-    print()
-    
+    return None
+
 # Choose random word of list_of_words
 
 def generate_random_word(list_of_words):
     word = random.choice(list_of_words)
-    random_word = list(word.rstrip("\n"))
-    return random_word
+    word = word.rstrip("\n")
+    return word
 
 # Function to hide random_word
 
-def hide_word(random_word):
-    hidden_word = ["_"] * len(random_word)
+def print_underscores(word):
+    hidden_word = ["_"] * len(word)
+    print(" ".join(hidden_word))
     return hidden_word
+    
+# Function for user to input a letter
 
-# Funtion to print an updated version hidden_word
-def print_hidden_word():
-    print(" ".join([letter for letter in hidden_word]))
-    return None
-
-#################### --- LIVES --- to be reviewed --- #########################
-
-print(f"Hint: {number_of_letters} letters")
-lives = 5
-print(f"Lives: {lives}")
-print()
-
-# Function to look for user's input in selected word
-def input():
-    for index in range(0,10):
-        print_hidden_word()
-        input_letter = input("Please type a letter or word:  ")
+def user_input():
+    input_letter = input("Please type a letter:  ")
+    print(input_letter)
+    return input_letter
 
 # Function to check whether the input_letter is a letter
 
 def validate_input_letter(input_letter):
     if input_letter.isalpha():
-        a = check_answer(word, input_letter)
+        print("it works")
+        return True
     else:
         print("Sorry, that's not a letter. Please try again.")
-        
+        return False
 
 # Function to check whether or not input_letter in in word
 
-def check_answer(word, input_letter):
+def check_and_print_letter(word):
     for index, letter in enumerate(word):
         if letter is input_letter:
             hidden_word[index] = input_letter
-        # else:
-        #     wrong = wrong_answer(word, input_letter) 
-
-    print_new_word(hidden_word)
-
-   # print(f'{input_letter} is right. Well done!')
-    print_new_word(hidden_word)
-    
-
-
-# Function for user to attempt to guess the word
-def input_word():
-    answer = input("Can you guess the word? (yes/no): ")
-    if answer is yes:
-        attempt = input("Type the word: ")
-    else:
-        input()
+    new_word = current_word_to_guess(hidden_word)
 
 
 
-
-
-# Function to check whether the user's guessed the word
-def check_user_attempt():
-    for index, letters in enumerate(attempt):
-        if user_attempt is selected_word:
-            user_attempt[index] == selected_word[index]
-
+# Funtion to print an updated version of hidden_word
+def current_word_to_guess(hidden_word):
+    print(" ".join([letter for letter in hidden_word]))
 
 ########################## M a i n ##################################
 
@@ -95,9 +66,13 @@ welcome = "Hello from the other side!"
 instructions = """Can you guess the word?"""
 
 print_instructions(welcome, instructions)
-random_word = generate_random_word(list_of_words)
+word = generate_random_word(list_of_words)
+print(word)
+hidden_word = print_underscores(word)
 
-hidden_word = hide_word(random_word)
-print_hidden_word(hidden_word)
-validation = validate_input_letter(input_letter)
-
+while hidden_word != word:
+    input_letter = user_input()
+    validation = validate_input_letter(input_letter)
+    if validation is True:
+        new_word = check_and_print_letter(word)
+        
