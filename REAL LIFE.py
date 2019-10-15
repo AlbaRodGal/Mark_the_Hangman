@@ -10,6 +10,9 @@ def print_instructions(welcome, instructions):
     print(instructions.center(150))
     return None
 
+def print_hint(word):
+    print(f'{len(word)} letters')
+
 # Choose random word of list_of_words
 
 def generate_random_word(list_of_words):
@@ -27,7 +30,7 @@ def print_underscores(word):
 # Function for user to input a letter
 
 def user_input():
-    input_letter = input("Please type a letter:  ")
+    input_letter = input("Please type a letter or a word:  ")
     print(input_letter)
     return input_letter
 
@@ -35,7 +38,6 @@ def user_input():
 
 def validate_input_letter(input_letter):
     if input_letter.isalpha():
-        print("it works")
         return True
     else:
         print("Sorry, that's not a letter. Please try again.")
@@ -50,12 +52,14 @@ def check_and_print_letter(word):
     new_word = current_word_to_guess(hidden_word)
 
 
-
 # Funtion to print an updated version of hidden_word
 def current_word_to_guess(hidden_word):
     print(" ".join([letter for letter in hidden_word]))
 
-########################## M a i n ##################################
+def check_word(word, hidden_word):
+    for index, letter in enumerate(word):
+        if hidden_word is word:
+            return True
 
 # Import file
 
@@ -68,6 +72,8 @@ instructions = """Can you guess the word?"""
 print_instructions(welcome, instructions)
 word = generate_random_word(list_of_words)
 print(word)
+print_hint(word)
+lives = 5
 hidden_word = print_underscores(word)
 
 while hidden_word != word:
@@ -75,4 +81,12 @@ while hidden_word != word:
     validation = validate_input_letter(input_letter)
     if validation is True:
         new_word = check_and_print_letter(word)
-        
+    if input_letter in word:
+        print(f'Well Done! {input_letter} is correct!')
+    else:
+        print(f'Sorry, {input_letter} is not in the word')
+        lives -= 1
+        print(f'{lives} lives')
+        if lives <1:
+            print("Game Over")
+            sys.exit()
