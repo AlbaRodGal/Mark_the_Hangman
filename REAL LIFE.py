@@ -64,6 +64,18 @@ def check_word(word, hidden_word):
         if hidden_word is word:
             return True
 
+def wrong_anser():
+    wrong_answer = colored(f'Sorry, {input_letter.upper()} is not in the word', 'red', attrs=['bold'])
+    print(wrong_answer)
+    LIVES -= 1
+    print(f'{LIVES} lives')
+    if LIVES <1:
+        game_over = colored("Game Over", 'red', attrs=['bold'])
+        print(game_over)
+        answer = colored(f'The correct word is {word.upper()}', 'magenta', attrs=['bold'])
+        print(answer)
+        sys.exit()  
+
 # Import file
 
 with open("/Users/albarodriguez/Projects/Mark_the_Hangman/ListOfWords.txt") as f:
@@ -84,23 +96,24 @@ while hidden_word != list(word):
     validation = validate_input_letter(input_letter)
     if validation is True:
         new_word = check_and_print_letter(word)
-    else: 
-        input_letter = user_input()
-
-    if input_letter in word:
-       right_answer = colored(f'Well Done! {input_letter.upper()} is correct!', 'green', attrs=['bold'])
-       print(right_answer)
-    else:
-        wrong_answer = colored(f'Sorry, {input_letter.upper()} is not in the word', 'red', attrs=['bold'])
-        print(wrong_answer)
-        LIVES -= 1
-        print(f'{LIVES} lives')
+        
+        if input_letter in word:
+            right_answer = colored(f'Well Done! {input_letter.upper()} is correct!', 'green', attrs=['bold'])
+            print(right_answer)
+        else:
+            wrong_answer = colored(f'Sorry, {input_letter.upper()} is not in the word', 'red', attrs=['bold'])
+            print(wrong_answer)
+            LIVES -= 1
+            print(f'{LIVES} lives')
         if LIVES <1:
             game_over = colored("Game Over", 'red', attrs=['bold'])
             print(game_over)
             answer = colored(f'The correct word is {word.upper()}', 'magenta', attrs=['bold'])
             print(answer)
-            sys.exit()    
+            sys.exit() 
+    else:
+        print(f'{LIVES} lives')
+   
 else: 
     congrats = colored(f'Congrats! {word.upper()} is the word', 'magenta', attrs=['bold'])
     print(congrats)
