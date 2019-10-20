@@ -84,6 +84,9 @@ while hidden_word != list(word):
     validation = validate_input_letter(input_letter)
     if validation is True:
         new_word = check_and_print_letter(word)
+    else: 
+        input_letter = user_input()
+
     if input_letter in word:
        right_answer = colored(f'Well Done! {input_letter.upper()} is correct!', 'green', attrs=['bold'])
        print(right_answer)
