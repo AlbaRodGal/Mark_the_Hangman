@@ -1,6 +1,8 @@
 "Second attempt of building a word guessing game."
 
 import random
+from colorama import init
+from termcolor import colored
 import sys
 
 # Welcome and instructions:
@@ -8,6 +10,7 @@ import sys
 def print_instructions(welcome, instructions):
     print(welcome.center(150))
     print(instructions.center(150))
+    print(lives_color)
     return None
 
 def print_hint(word):
@@ -30,8 +33,7 @@ def print_underscores(word):
 # Function for user to input a letter
 
 def user_input():
-    input_letter = input("Please type a letter or a word:  ")
-    print(input_letter)
+    input_letter = input("Please type a letter or a word: ")
     return input_letter
 
 # Function to check whether the input_letter is a letter
@@ -54,7 +56,8 @@ def check_and_print_letter(word):
 
 # Funtion to print an updated version of hidden_word
 def current_word_to_guess(hidden_word):
-    print(" ".join([letter for letter in hidden_word]))
+    current_word_to_guess = colored(" ".join([letter for letter in hidden_word]), "yellow", attrs=['bold'])
+    print(current_word_to_guess)
 
 def check_word(word, hidden_word):
     for index, letter in enumerate(word):
@@ -68,25 +71,34 @@ with open("/Users/albarodriguez/Projects/Mark_the_Hangman/ListOfWords.txt") as f
 
 welcome = "Hello from the other side!"
 instructions = """Can you guess the word?"""
+LIVES = 5
+lives_color = colored(f'{LIVES} lives', "magenta", attrs=["bold"])
 
 print_instructions(welcome, instructions)
 word = generate_random_word(list_of_words)
-print(word)
 print_hint(word)
-lives = 5
 hidden_word = print_underscores(word)
 
-while hidden_word != word:
+while hidden_word != list(word):
     input_letter = user_input()
     validation = validate_input_letter(input_letter)
     if validation is True:
         new_word = check_and_print_letter(word)
     if input_letter in word:
-        print(f'Well Done! {input_letter} is correct!')
+       right_answer = colored(f'Well Done! {input_letter.upper()} is correct!', 'green', attrs=['bold'])
+       print(right_answer)
     else:
-        print(f'Sorry, {input_letter} is not in the word')
-        lives -= 1
-        print(f'{lives} lives')
-        if lives <1:
-            print("Game Over")
-            sys.exit()
+        wrong_answer = colored(f'Sorry, {input_letter.upper()} is not in the word', 'red', attrs=['bold'])
+        print(wrong_answer)
+        LIVES -= 1
+        print(f'{LIVES} lives')
+        if LIVES <1:
+            game_over = colored("Game Over", 'red', attrs=['bold'])
+            print(game_over)
+            answer = colored(f'The correct word is {word.upper()}', 'magenta', attrs=['bold'])
+            print(answer)
+            sys.exit()    
+else: 
+    congrats = colored(f'Congrats! {word.upper()} is the word', 'magenta', attrs=['bold'])
+    print(congrats)
+    sys.exit()
