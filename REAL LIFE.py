@@ -14,7 +14,7 @@ def print_instructions(welcome, instructions):
     return None
 
 def print_hint(word):
-    print(f'{len(word)} letters')
+    print(f'Hint: {len(word)} letters')
 
 # Choose random word of list_of_words
 
@@ -64,17 +64,6 @@ def check_word(word, hidden_word):
         if hidden_word is word:
             return True
 
-def wrong_anser():
-    wrong_answer = colored(f'Sorry, {input_letter.upper()} is not in the word', 'red', attrs=['bold'])
-    print(wrong_answer)
-    LIVES -= 1
-    print(f'{LIVES} lives')
-    if LIVES <1:
-        game_over = colored("Game Over", 'red', attrs=['bold'])
-        print(game_over)
-        answer = colored(f'The correct word is {word.upper()}', 'magenta', attrs=['bold'])
-        print(answer)
-        sys.exit()  
 
 # Import file
 
